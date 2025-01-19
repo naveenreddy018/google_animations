@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+}
+
+.contain {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 50%;
+  gap: 35px;
+  height: 280px;
+}
+
+.contain:hover {
+  cursor: pointer;
+}
