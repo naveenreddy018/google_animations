@@ -1,28 +1,28 @@
 .make_it_yours_container {
-  position: relative;
-  overflow: hidden;
-  height: 100vh;
-  text-align: center;
-
-  .make_it_yours {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    color: #fff;
-    font-size: 3rem;
-    transition: opacity 0.5s ease;
-
-    span {
-      color: #ff6347;
+    position: relative;
+    overflow: hidden;
+    height: 100vh; 
+    text-align: center;
+  
+    .make_it_yours {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      color: #fff;
+      font-size: 3rem;
+      transition: opacity 0.5s ease; 
+      span {
+        color: #ff6347;
+      }
+    }
+  
+    .montain_image {
+      img {
+        width: 100%;
+        height: auto;
+      }
     }
   }
-
-  .montain_image {
-    img {
-      width: 100%;
-      height: auto;
-    }
-  }
-}
+  

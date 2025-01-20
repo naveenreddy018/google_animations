@@ -1,4 +1,4 @@
-.header_container{
+.header_container {
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -10,50 +10,49 @@
     top: 0px;
     z-index: 1000;
 
-    .nav_container{
+    .nav_container {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 30px;
         padding: 10px 0px;
-       
-        .header_image{
+
+        .header_image {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
-            
-            p{
+            gap: 10px;
+
+            p {
                 color: blueviolet;
                 font-size: 1.3rem;
             }
         }
 
-        .nav_links{
+        .nav_links {
             display: flex;
             justify-content: space-around;
             padding: 10px;
             gap: 15px;
 
-            ul  {
+            ul {
                 display: flex;
-                gap:30px;
+                gap: 20px;
                 list-style: none;
 
-                li{
-                    
+                li {
+
                     a {
                         text-decoration: none;
-                    color: black;
-                    font-size: 1.3rem;
+                        color: black;
+                        font-size: 1.2rem;
                     }
                 }
             }
-            
-            }
-        }
 
-    
+        }
+    }
+
+
 
 }
-

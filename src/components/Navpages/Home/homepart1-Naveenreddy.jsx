@@ -18,7 +18,7 @@ function Homepart1() {
         start: "top center",
         end: "bottom center",
         scrub: 1,
-        toggleActions: "play reverse play reverse", // Makes the animation repeatable
+        toggleActions: "play reverse play reverse",
       },
     })
       .to(imageRef.current, {
@@ -36,7 +36,7 @@ function Homepart1() {
       .to(imageRef.current, {
         scale: 1,
         duration: 1,
-      });
+      }).to(textRef.current,{opacity : 1,duration : 1});
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ImageComponent from "../../Image/image";
 import { assets } from "../../../assets/assets";
 import { Link } from "react-router-dom";
@@ -44,34 +44,31 @@ function Home() {
 
   gsap.registerPlugin(ScrollTrigger)
 
+  const imageContainerRef = useRef(null);
+
   useEffect(() => {
+    const images = imageContainerRef.current.querySelectorAll("div");
 
-    gsap.to(".home_image_conatiner div", {
-      scrollTrigger: {
-        trigger: ".home_image_conatiner",
-        start: "top center",
-        end: "bottom center",
-        scrub: true,
-        onEnter: () => {
-
-          gsap.to(".home_image_conatiner div", {
-            width: "200px",
-            height: "200px",
-            margin: "0 auto",
-            duration: 0.5,
-          });
+    gsap.fromTo(
+      images,
+      { width: "200px" },
+      {
+        width: "300px", height : "300px",
+        duration: 1,
+        scrollTrigger: {
+          trigger: imageContainerRef.current,
+          start: "top center", 
+          end: "bottom center",
+          scrub: true, 
+          onEnter: () => {
+            gsap.to(images, { width: "300px", height : "500px" }); 
+          },
+          onLeaveBack: () => {
+            gsap.to(images, { width: "150px" });
+          },
         },
-        onLeaveBack: () => {
-
-          gsap.to(".home_image_conatiner div", {
-            width: (index, target) => target.dataset.originalWidth,
-            height: (index, target) => target.dataset.originalHeight,
-            margin: "0",
-            duration: 0.5,
-          });
-        },
-      },
-    });
+      }
+    );
   }, []);
   return (
     <div><section className="home">
@@ -80,29 +77,29 @@ function Home() {
           <div className="display_img">
 
             <div className="display_img_text">
-              <a href="https://chromewebstore.google.com/detail/image-downloader/cnpniohnfphhjihaiiggeabnkjhpaldj"><img src={assets.qrcode} alt="" width="100px" /></a>
+              <a href="https://chromewebstore.google.com/detail/image-downloader/cnpniohnfphhjihaiiggeabnkjhpaldj"><img src={assets.qrcode} alt="qrcode" width="100px" /></a>
               <p>Get Chrome for your <br /> <span className="dispay_text">phone</span></p>
             </div>
-            <div><button style={{ padding: "10px", position: 'relative', left: "10px", backgroundColor: "greenyellow", fontSize: "24px", borderRadius: "10px" }} onClick={setdown}>&gt;</button></div>
+            <div><button style={{ padding: "10px", position: 'relative', left: "10px", backgroundColor: "greenyellow", fontSize: "24px", borderRadius: "10px" ,color : "black"}} onClick={setdown}>&gt;</button></div>
           </div>
         ) : (<div className="display_img" style={{ display: "flex", gap: "50px" }}>
-          <h1><img src={assets.smartphone} width="50px" /></h1>
-          <div><button style={{ padding: "10px", position: 'relative', right: "30px", backgroundColor: "greenyellow", fontSize: "24px", borderRadius: "10px" }} onClick={setdown}>&gt;</button></div>
+          <h1><img src={assets.smartphone} width="50px" alt="mobile_screen" /></h1>
+          <div><button style={{ padding: "10px", position: 'relative', right: "30px", backgroundColor: "blue", fontSize: "24px", borderRadius: "10px" ,color : "black" }} onClick={setdown}>&gt;</button></div>
         </div>
 
         )
       }
       <div className="home-container">
         <div className="home-header-image">
-          <ImageComponent src={assets.favicon} width="50px" />
+          <ImageComponent src={assets.favicon} alt="favicon" width="50px" />
         </div>
         <div className="home-title">
           <h1>The browser <br /> built to be yours</h1>
         </div>
         <div className="home-download">
-          <button>           <ImageComponent src={assets.downloadchrome} width="20px" /> Download Chrome</button>
+          <button>           <ImageComponent src={assets.downloadchrome} width="20px" alt="downloadChrome"/> Download Chrome</button>
           <div className="update-link">
-            <Link >I want to update my chrome</Link> {/* Example of adding a target route */}
+            <Link >I want to update my chrome</Link>
           </div>
           <p>For Windows 11/10 64-bit</p>
         </div>
@@ -124,17 +121,17 @@ function Home() {
     </section>
 
       <section>
-        <div className="home_image_conatiner">
-          <div><ImageComponent src={assets.mobile} /></div>
-          <div><ImageComponent src={assets.google_ai} /></div>
-          <div><ImageComponent src={assets.home_poster} /></div>
-          <div><ImageComponent src={assets.slider} width="400px" /></div>
+        <div ref={imageContainerRef}  className="home_image_conatiner">
+          <div><ImageComponent src={assets.mobile}  alt="mobile"/></div>
+          <div><ImageComponent src={assets.google_ai} alt="google_ai"/></div>
+          <div><ImageComponent src={assets.home_poster} alt="home_poster"/></div>
+          <div><ImageComponent src={assets.fast_mobile} width="400px" alt="fast_mobile" /></div>
         </div>
       </section>
       <section className="updates-section">
         <div className="updates-header">
           <h1>
-            Discover the latest <br /> <span className="update_word"> <ImageComponent src="https://png.pngtree.com/element_our/20190531/ourmid/pngtree-return-icon-image_1287495.jpg" width="50px" />updates</span> from Chrome
+            Discover the latest <br /> <span className="update_word"> <ImageComponent src="https://png.pngtree.com/element_our/20190531/ourmid/pngtree-return-icon-image_1287495.jpg" width="50px" alt="updates"/>updates</span> from Chrome
           </h1>
         </div>
         <div className="updates-content">
@@ -149,7 +146,7 @@ function Home() {
               </p>
               <a href="#">Learn about automatic updates</a>
             </div>
-            <ImageComponent className="update_cardimage" src={assets.updates_image} width="400px" />
+            <ImageComponent className="update_cardimage" src={assets.updates_image} alt="updates_image" width="400px" />
           </div>
           <div id="update_card" className="update-card">
             <div className="child_update_card">
@@ -160,7 +157,7 @@ function Home() {
               </p>
               <a href="#">Learn what’s new on Chrome</a>
             </div>
-            <ImageComponent className="update_cardimage" src="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/512/chrome.png" width="200px" />
+            <ImageComponent className="update_cardimage" alt="chrome_img" src="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/512/chrome.png" width="200px" />
           </div>
         </div>
       </section>
@@ -184,21 +181,21 @@ function Home() {
             </div>
             <button>Explore Extensions</button>
           </div>
-          <div className="extend_image"><ImageComponent src={assets.extensions} width="700px" /></div>
+          <div className="extend_image"><ImageComponent src={assets.extensions} alt="extensions" width="700px" /></div>
         </div>
 
         <div className="extend_icons">
-          <img src={assets.download1} width="100px" />
-          <img src={assets.download2} width="100px" />
-          <img src={assets.download3} width="100px" />
-          <img src={assets.download4} width="100px" />
+          <img src={assets.download1}  alt="download1_icon" width="100px" />
+          <img src={assets.download2}  alt="download2_icon" width="100px" />
+          <img src={assets.download3}  alt="download3_icon" width="100px" />
+          <img src={assets.download4}  alt="download4_icon" width="100px" />
         </div>
       </section>
 
       <section className="security_section">
         <div className="security_container">
           <div className="security_text">
-            <h1>Stay<span className="security_sub_text"> <img src="https://img.freepik.com/premium-psd/white-shield-with-tick-mark-it-transparent-background_1085577-83837.jpg" width="50px" />safe</span><br />
+            <h1>Stay<span className="security_sub_text"> <img src="https://img.freepik.com/premium-psd/white-shield-with-tick-mark-it-transparent-background_1085577-83837.jpg" alt="safe" width="50px" />safe</span><br />
               while you browser</h1>
           </div>
           <div className="security_cards">
@@ -268,7 +265,7 @@ function Home() {
                         transition: "transform 2s ease",
                       }}
                     >
-                      <img src={assets.safety} width="500px" height="250px" />
+                      <img src={assets.safety} width="500px" alt="safety" height="250px" />
                       <div className="cross_false2_text">
                         <h3>
                           Chrome has Google Password Manager built in, which makes it simple to save, manage and protect your passwords online. It also helps you create stronger passwords for every account you use.
@@ -504,12 +501,12 @@ function Home() {
             <p>Download Chrome on your mobile device or tablet <br /><span className="middle_part"> and sign into your account for the same browser</span> <span className="bottom_part">experience, everywhere.</span></p>
           </div>
           <div className="footer_btn">
-            <button><img src={assets.downloadchrome} alt="" width="40px" />Download Chrome</button>
+            <button><img src={assets.downloadchrome} alt="download_chrome" width="40px" />Download Chrome</button>
           </div>
         </div>
         <div className="footer_img">
           <div className="footer_img_text">
-            <img src={assets.qrcode} alt="" width="120px" />
+            <img src={assets.qrcode} alt="chrome_qrcode" width="120px" />
             <p>Get Chrome for your <br /> <span className="footer_text">phone</span></p>
           </div>
         </div>
